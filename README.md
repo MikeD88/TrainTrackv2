@@ -1,5 +1,34 @@
 # README
 
+_____________________________________________________________________________________________________
+
+Initial Setup
+
+1 Install dependecies -
+yarn install
+
+2 Set up Docker -
+docker run --rm --name pg-docker -e POSTGRES_PASSWORD=docker -d -p 5432:5432 \
+-v $HOME/docker/volumes/postgres:/var/lib/postgresql/data postgres
+
+3 Generate Session Secret Code and copy for next step -
+yarn rw g secret
+
+4 Set up .env.defaults (Paste your session secret code into your env file and update database URL) *Do not save session secret code here* -
+
+SESSION_SECRET=Insert genereated session secret code here
+
+# schema.prisma defaults
+DATABASE_URL=postgresql://postgres:docker@localhost:5432/TrainTrackv2
+
+5 Run migrations and seeds -
+yarn rw prisma migrate dev
+
+6 Run redwood developement -
+yarn rw dev
+
+_____________________________________________________________________________________________________
+
 Welcome to [RedwoodJS](https://redwoodjs.com)!
 
 > **Prerequisites**
